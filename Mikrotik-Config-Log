@@ -1,0 +1,1 @@
+/system logging action add name=wazuh target=remote remote=192.168.1.65 remote-port=514 remote-protocol=udp remote-log-format=syslog syslog-facility=local0 syslog-severity=auto syslog-time-format=iso8601
