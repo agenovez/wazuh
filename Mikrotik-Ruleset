@@ -1,0 +1,38 @@
+#sudo nano /var/ossec/etc/rules/local_rules.xml
+
+<group name="mikrotik,routeros,">
+
+  <rule id="100200" level="0">
+    <match>system,|account,|firewall,|interface,|wireguard,|ipsec,</match>
+    <description>MikroTik RouterOS base event</description>
+  </rule>
+
+  <rule id="100201" level="8">
+    <if_sid>100200</if_sid>
+    <match>login failure</match>
+    <description>MikroTik login failure detected</description>
+    <group>authentication_failed,mikrotik,</group>
+  </rule>
+
+  <rule id="100202" level="5">
+    <if_sid>100200</if_sid>
+    <match>logged in</match>
+    <description>MikroTik user logged in</description>
+    <group>authentication_success,mikrotik,</group>
+  </rule>
+
+  <rule id="100203" level="7">
+    <if_sid>100200</if_sid>
+    <match>changed by</match>
+    <description>MikroTik configuration change detected</description>
+    <group>configuration_change,mikrotik,</group>
+  </rule>
+
+  <rule id="100204" level="6">
+    <if_sid>100200</if_sid>
+    <match>WAN_ADMIN_DROP</match>
+    <description>MikroTik blocked WAN management attempt</description>
+    <group>firewall_drop,mikrotik,</group>
+  </rule>
+
+</group>
